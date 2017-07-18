@@ -1,0 +1,14 @@
+br\com\springboot\restcrud\Application.class
+br\com\springboot\restcrud\service\IUserService.class
+br\com\springboot\restcrud\model\Profile.class
+br\com\springboot\restcrud\model\User.class
+br\com\springboot\restcrud\controller\HelloController.class
+br\com\springboot\restcrud\model\GenericObject.class
+br\com\springboot\restcrud\model\AbstractObject.class
+br\com\springboot\restcrud\service\impl\UserService.class
+br\com\springboot\restcrud\repository\IProfileRepository.class
+br\com\springboot\restcrud\service\IGenericService.class
+br\com\springboot\restcrud\controller\UserController.class
+br\com\springboot\restcrud\SecurityConfiguration.class
+br\com\springboot\restcrud\CustomBasicAuthenticationEntryPoint.class
+br\com\springboot\restcrud\repository\IUserRepository.class

@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: rest-crud
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: filipe.soares
+Implementation-Vendor-Id: br.com.springboot
+Build-Jdk: 1.8.0_121
+Implementation-URL: http://projects.spring.io/spring-boot/rest-crud/
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+

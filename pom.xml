@@ -21,19 +21,18 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <!-- tag::actuator[] -->
+        
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-        <!-- end::actuator[] -->
-        <!-- tag::tests[] -->
+        
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <!-- end::tests[] -->
+        
         <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -42,7 +41,7 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>        
-        <!-- Spring Security -->
+        
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
@@ -58,7 +57,7 @@
 		    <artifactId>spring-security-crypto</artifactId>
 		    <version>${springsecurity.version}</version>
 		</dependency>
-		<!-- /Spring Security -->
+		
     </dependencies>
     	
     <build>

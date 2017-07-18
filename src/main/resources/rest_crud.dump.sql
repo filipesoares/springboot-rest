@@ -81,7 +81,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (2,'2017-07-17 16:57:15','2017-07-17 17:01:20','admin@gmail.com',1,'Administrator','$2a$10$9a3qfk.n4KLi3gVEhWtlYOTRg3E8b9Lwm6kJ6Ig.6jwk/9sBLgbya','admin',1);
+INSERT INTO `user` VALUES ('2017-07-17 16:57:15','2017-07-17 17:01:20','admin@gmail.com',1,'Administrator','$2a$10$9a3qfk.n4KLi3gVEhWtlYOTRg3E8b9Lwm6kJ6Ig.6jwk/9sBLgbya','admin',1);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

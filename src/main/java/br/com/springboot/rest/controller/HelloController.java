@@ -1,4 +1,4 @@
-package br.com.springboot.restcrud.controller;
+package br.com.springboot.rest.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,7 +8,7 @@ public class HelloController {
     
     @RequestMapping("/")
     public String index() {
-        return "Welcome to App Rest API!";
+        return "Welcome to Rest API!";
     }
     
 }

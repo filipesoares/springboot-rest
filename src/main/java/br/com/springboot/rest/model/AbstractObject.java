@@ -1,65 +1,66 @@
-package br.com.springboot.restcrud.model;
+package br.com.springboot.rest.model;
 
-import java.util.Calendar;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @MappedSuperclass
-public abstract class AbstractObject implements GenericObject{
+public abstract class AbstractObject implements GenericObject {
 	
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	protected Long id;
 	
 	@Column(columnDefinition="DATETIME", updatable=false)
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd/MM/yyyy", timezone="America/Sao_Paulo", locale="pt-BR")
-	@Temporal(TemporalType.TIMESTAMP)
-	private Calendar created;
+	protected LocalDateTime created;
 	
 	@Column(columnDefinition="DATETIME", insertable=false)
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd/MM/yyyy", timezone="America/Sao_Paulo", locale="pt-BR")
-	@Temporal(TemporalType.TIMESTAMP)
-	private Calendar modified;
+	protected LocalDateTime modified;
 	
-	public int getId() {
+	@Override
+	public Long getId() {
 		return id;
 	}
-	public void setId(int id) {
+
+	public void setId(Long id) {
 		this.id = id;
 	}
 	
-	public Calendar getCreated() {
+	@Override
+	public LocalDateTime getCreated() {
 		return created;
 	}
-	
-	public void setCreated(Calendar created) {
+
+	public void setCreated(LocalDateTime created) {
 		this.created = created;
 	}
-	
-	public Calendar getModified() {
+
+	@Override
+	public LocalDateTime getModified() {
 		return modified;
 	}
-	
-	public void setModified(Calendar modified) {
+
+	public void setModified(LocalDateTime modified) {
 		this.modified = modified;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -69,7 +70,10 @@ public abstract class AbstractObject implements GenericObject{
 		if (getClass() != obj.getClass())
 			return false;
 		AbstractObject other = (AbstractObject) obj;
-		if (id != other.id)
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}

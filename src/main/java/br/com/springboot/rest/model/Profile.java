@@ -1,28 +1,24 @@
-package br.com.springboot.restcrud.model;
+package br.com.springboot.rest.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
-import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @Entity
 @Table(name="profile")
-@Component
+@JsonInclude(value = Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Profile extends AbstractObject implements GenericObject, Serializable{
 
-	@JsonIgnore
-	private static final long serialVersionUID = 1L;	
-
-	@Column
 	private String name;
 	
-	@Column(columnDefinition="TINYINT(1)")
 	@Type(type="org.hibernate.type.NumericBooleanType")
 	private boolean enabled;
 

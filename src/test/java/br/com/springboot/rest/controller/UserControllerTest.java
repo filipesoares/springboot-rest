@@ -10,7 +10,6 @@ import java.nio.charset.Charset;
 
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;

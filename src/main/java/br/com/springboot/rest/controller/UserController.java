@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -35,8 +36,13 @@ public class UserController {
 	UserRepository repository;
 	
 	@GetMapping
-	public ResponseEntity<Page<User>> list(@RequestParam(defaultValue="0", required=false) int page, @RequestParam(defaultValue="100", required=false) int size) {
-		return new ResponseEntity<Page<User>>(repository.findAll(PageRequest.of(page, size)), HttpStatus.OK);
+	public ResponseEntity<Page<User>> list(
+		@RequestParam(defaultValue="0", required=false) int page, 
+		@RequestParam(defaultValue="100", required=false) int size,
+		@RequestParam(required=false) String sort) {
+
+		return new ResponseEntity<Page<User>>(repository.findAll(PageRequest.of(page, size, Direction.ASC, sort)), HttpStatus.OK);
+		
 	}
 	
 	@GetMapping("/{id}")

@@ -6,11 +6,13 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.web.config.EnableSpringDataWebSupport;
 
 import br.com.springboot.rest.model.User;
 import br.com.springboot.rest.repository.UserRepository;
 
 @SpringBootApplication
+@EnableSpringDataWebSupport
 public class Application {
 
     public static void main(String[] args) {

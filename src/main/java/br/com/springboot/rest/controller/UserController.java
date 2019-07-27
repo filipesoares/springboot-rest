@@ -1,5 +1,7 @@
 package br.com.springboot.rest.controller;
 
+import static org.springframework.data.domain.Sort.Direction.ASC;
+
 import java.time.LocalDateTime;
 
 import javax.persistence.EntityNotFoundException;
@@ -9,7 +11,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,7 +24,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -29,20 +31,17 @@ import br.com.springboot.rest.model.User;
 import br.com.springboot.rest.repository.UserRepository;
 
 @RestController
-@RequestMapping(value="/users", produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/users", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class UserController {
 
 	@Autowired
 	UserRepository repository;
-	
-	@GetMapping
-	public ResponseEntity<Page<User>> list(
-		@RequestParam(defaultValue="0", required=false) int page, 
-		@RequestParam(defaultValue="100", required=false) int size,
-		@RequestParam(required=false) String sort) {
 
-		return new ResponseEntity<Page<User>>(repository.findAll(PageRequest.of(page, size, Direction.ASC, sort)), HttpStatus.OK);
-		
+	@GetMapping
+	public ResponseEntity<Page<User>> list(@PageableDefault(sort = "id", direction = ASC) Pageable page) {
+
+		return new ResponseEntity<Page<User>>(repository.findAll(page), HttpStatus.OK);
+
 	}
 	
 	@GetMapping("/{id}")

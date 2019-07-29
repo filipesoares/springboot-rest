@@ -47,6 +47,63 @@ public class UserControllerTest extends BaseTest {
 	}
 	
 	@Test
+	public void listFirstPageTest() throws Exception {
+		mvc.perform(MockMvcRequestBuilders.get("/" + resource)
+				.headers(headers)
+				.param("page", "0"))
+				.andExpect(status().isOk())
+				.andExpect(content().string(notNullValue()));
+	}
+	
+	@Test
+	public void listFirstPageWithHundredTest() throws Exception {
+		mvc.perform(MockMvcRequestBuilders.get("/" + resource)
+				.headers(headers)
+				.param("page", "0")
+				.param("size", "100"))
+				.andExpect(status().isOk())
+				.andExpect(content().string(notNullValue()));
+	}
+	
+	@Test
+	public void listFirstHundredTest() throws Exception {
+		mvc.perform(MockMvcRequestBuilders.get("/" + resource)
+				.headers(headers)
+				.param("size", "100"))
+				.andExpect(status().isOk())
+				.andExpect(content().string(notNullValue()));
+	}
+	
+	@Test
+	public void listFirstFiftySortedByNameTest() throws Exception {
+		mvc.perform(MockMvcRequestBuilders.get("/" + resource)
+				.headers(headers)
+				.param("page", "0")
+				.param("size", "50")
+				.param("sort", "name"))
+				.andExpect(status().isOk())
+				.andExpect(content().string(notNullValue()));
+	}
+	
+	@Test
+	public void listSortedByNameDescTest() throws Exception {
+		mvc.perform(MockMvcRequestBuilders.get("/" + resource)
+				.headers(headers)
+				.param("sort", "name,desc"))
+				.andExpect(status().isOk())
+				.andExpect(content().string(notNullValue()));
+	}
+	
+	@Test
+	public void listSortedByUsernameAscTest() throws Exception {
+		mvc.perform(MockMvcRequestBuilders.get("/" + resource)
+				.headers(headers)
+				.param("sort", "username,asc"))
+				.andExpect(status().isOk())
+				.andExpect(content().string(notNullValue()));
+	}
+	
+	@Test
 	public void fetchTest() throws Exception {
 		
 		MvcResult result = mvc.perform(MockMvcRequestBuilders.post("/" + resource)

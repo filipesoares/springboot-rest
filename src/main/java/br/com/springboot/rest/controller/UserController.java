@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -58,6 +59,7 @@ public class UserController {
 
 	@PostMapping
 	@Transactional
+	@CacheEvict(allEntries=true, value="list.user")
 	public ResponseEntity<Void> create(@RequestBody User user, UriComponentsBuilder ucBuilder) {
 		try {
 			user.setCreated(LocalDateTime.now());
@@ -72,6 +74,7 @@ public class UserController {
 
 	@PutMapping("/{id}")
 	@Transactional
+	@CacheEvict(allEntries=true, value="list.user")
 	public ResponseEntity<User> update(@PathVariable("id") Long id, @RequestBody User user, HttpServletRequest request) {
 		try {
 			repository.getOne(id);
@@ -87,6 +90,7 @@ public class UserController {
 
 	@DeleteMapping("/{id}")
 	@Transactional
+	@CacheEvict(allEntries=true, value="list.user")
 	public ResponseEntity<User> delete(@PathVariable("id") Long id) {
 		try{
 			repository.delete(repository.getOne(id));

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -37,6 +38,7 @@ public class UserController {
 	UserRepository repository;
 
 	@GetMapping
+	@Cacheable(value = "list.user")
 	public ResponseEntity<Page<User>> list(@PageableDefault(sort = "id", direction = ASC) Pageable page) {
 
 		return new ResponseEntity<Page<User>>(repository.findAll(page), HttpStatus.OK);

@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
+import org.springframework.security.core.GrantedAuthority;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -15,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @Table(name="profile")
 @JsonInclude(value = Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Profile extends AbstractObject implements GenericObject, Serializable{
+public class Profile extends AbstractObject implements GenericObject, GrantedAuthority, Serializable{
 
 	private String name;
 	
@@ -36,6 +37,11 @@ public class Profile extends AbstractObject implements GenericObject, Serializab
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
+	}
+
+	@Override
+	public String getAuthority() {
+		return this.name;
 	}
 	
 }

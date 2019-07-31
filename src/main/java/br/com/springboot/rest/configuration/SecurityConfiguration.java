@@ -32,9 +32,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		
 		http
 			.authorizeRequests()
-			.antMatchers("/users/*").permitAll()
+			.antMatchers("/").permitAll()
 			.anyRequest().authenticated()
-			.and().formLogin();
+			.and().httpBasic();
 	}
 	
 	// Static Resources

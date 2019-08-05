@@ -71,6 +71,15 @@ public class UserController {
 			return new ResponseEntity<Void>(HttpStatus.BAD_GATEWAY);
 		}
 	}
+	
+	@PostMapping("/auth")
+	public ResponseEntity<Void> auth(@RequestBody User user, UriComponentsBuilder ucBuilder) {
+		try {
+			return new ResponseEntity<Void>(HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<Void>(HttpStatus.BAD_GATEWAY);
+		}
+	}
 
 	@PutMapping("/{id}")
 	@Transactional

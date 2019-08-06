@@ -37,7 +37,7 @@ public class UserController {
 
 	@Autowired
 	UserRepository repository;
-
+	
 	@GetMapping
 	@Cacheable(value = "list.user")
 	public ResponseEntity<Page<User>> list(@PageableDefault(sort = "id", direction = ASC) Pageable page) {
@@ -72,15 +72,6 @@ public class UserController {
 		}
 	}
 	
-	@PostMapping("/auth")
-	public ResponseEntity<Void> auth(@RequestBody User user, UriComponentsBuilder ucBuilder) {
-		try {
-			return new ResponseEntity<Void>(HttpStatus.OK);
-		} catch (Exception e) {
-			return new ResponseEntity<Void>(HttpStatus.BAD_GATEWAY);
-		}
-	}
-
 	@PutMapping("/{id}")
 	@Transactional
 	@CacheEvict(allEntries=true, value="list.user")
@@ -110,4 +101,5 @@ public class UserController {
 			return new ResponseEntity<User>(HttpStatus.BAD_GATEWAY);
 		}
 	}
+	
 }

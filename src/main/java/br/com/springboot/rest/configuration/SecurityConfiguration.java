@@ -11,7 +11,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import br.com.springboot.rest.filter.AuthenticationInterceptor;
 import br.com.springboot.rest.service.UserService;
 
 @Configuration
@@ -20,6 +22,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	UserService userDetailsService;
+	
+	@Autowired
+	private TokenService tokenService;
 	
 	@Override
 	@Bean
@@ -45,7 +50,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.antMatchers("/token").permitAll()
 			.anyRequest().authenticated()
 			.and().csrf().disable()
-			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+			.and().addFilterBefore(new AuthenticationInterceptor(tokenService), UsernamePasswordAuthenticationFilter.class);
 	}
 	
 	// Static Resources

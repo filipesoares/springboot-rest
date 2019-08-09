@@ -7,6 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import br.com.springboot.rest.model.User;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
@@ -39,6 +40,11 @@ public class TokenService {
 		} catch (Exception e) {
 			return false;
 		}
+	}
+
+	public Long getPrincipal(String token) {
+		Claims claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+		return Long.valueOf(claims.getSubject());
 	}
 	
 }

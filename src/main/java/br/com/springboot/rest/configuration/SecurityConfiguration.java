@@ -14,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import br.com.springboot.rest.filter.AuthenticationInterceptor;
+import br.com.springboot.rest.repository.UserRepository;
 import br.com.springboot.rest.service.UserService;
 
 @Configuration
@@ -25,6 +26,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	private TokenService tokenService;
+	
+	@Autowired
+	private UserRepository userRepository;
 	
 	@Override
 	@Bean
@@ -51,7 +55,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.anyRequest().authenticated()
 			.and().csrf().disable()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-			.and().addFilterBefore(new AuthenticationInterceptor(tokenService), UsernamePasswordAuthenticationFilter.class);
+			.and().addFilterBefore(new AuthenticationInterceptor(tokenService, userRepository), UsernamePasswordAuthenticationFilter.class);
 	}
 	
 	// Static Resources

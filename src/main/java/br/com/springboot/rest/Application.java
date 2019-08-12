@@ -13,10 +13,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import br.com.springboot.rest.model.User;
 import br.com.springboot.rest.repository.UserRepository;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 @EnableSpringDataWebSupport
 @EnableCaching
+@EnableSwagger2
 public class Application {
 
     public static void main(String[] args) {
